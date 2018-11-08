@@ -15,12 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 Route::get('login',function(){
 	return view('login');
 });
-=======
+
 Route::get('/contact', function() {
 	return view('contact');
 });
->>>>>>> origin/tuan_dev
