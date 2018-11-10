@@ -1,2 +1,7 @@
-# Laravel Framework ver 5.4.30 (lasted build)
-## Spa build by Hưng Thịnh and Khắc Tuấn
+# SPA Management System 
+## Author: Khắc Tuấn & Hưng Thịnh
+## Language: PHP (Laravel Framework)
+## Framework version: 5.4.30 (lasted build)
+## Release version: beta_r0.1.1
+##Changeslogs
+
