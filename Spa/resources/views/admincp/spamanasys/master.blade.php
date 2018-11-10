@@ -698,6 +698,10 @@
 	<!--begin::Page Snippets -->
 	<script src="assets/app/js/dashboard.js" type="text/javascript"></script>
 	<!--end::Page Snippets -->
+	<!--begin::Custom page JS -->
+	@yield('script')
+	<!--end::Custom page JS-->
+
 </body>
 <!-- end::Body -->
 </html>
