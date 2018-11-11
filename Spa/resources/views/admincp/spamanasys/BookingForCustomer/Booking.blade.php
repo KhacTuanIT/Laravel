@@ -34,7 +34,7 @@
 							<div class="m-widget5">
 								<div class="m-widget5__item">
 									<div class="m-widget1__item">
-										<form action="{{ route('spa_Booking') }}" method="POST" class="m-form m-form--fit m-form--label-align-right">
+										<form action="" method="POST" class="m-form m-form--fit m-form--label-align-right">
 											<div class="form-group m-form__group row">
 												<label class="col-form-label col-lg-3 col-sm-3">
 													Tên khách hàng
@@ -181,9 +181,9 @@
 									target-typeroom="{{$value->getRoomType->RoomTypeName}}"
 									data-id_room="{{$value->RoomId}}">
 									Chọn phòng
-								</button>
-							</td>								
-						</tr>
+									</button>
+								</td>								
+							</tr>
 						@endforeach
 					</tbody>
 				</table>
