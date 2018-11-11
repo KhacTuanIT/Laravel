@@ -15,8 +15,4 @@ class BookingForCustomerController extends Controller
     	$listStaff = ListStaff::where('StaffActive', 0)->get(); 
     	return view('admincp.spamanasys.BookingForCustomer.Booking',compact('listRoom','listServices','listStaff'));
     }
-
-    public function booking(){
-    	
-    }
 }
