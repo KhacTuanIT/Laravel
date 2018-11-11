@@ -1,0 +1,83 @@
+/*<=========================================>*/
+/*<============== BUTTON EFFECT ============>*/
+/*<=========================================>*/
+
+
+.btn-ob {
+	position: relative;
+	padding: 7px 12px;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: bolder;
+	color: #26C4D5;
+}
+.btn-ob:hover,
+.btn-ob:focus {
+	text-decoration: none;
+	color: #26C4D5;
+}
+.btn-ob:before,
+.btn-ob:after {
+	content: '';
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	width: calc(100% + 2px);
+	height: calc(100% + 2px);
+	border: 1px solid transparent;
+	background: transparent;
+}.btn-ob:hover:before {
+	animation: borderhvr .3s linear forwards;
+}
+.btn-ob:hover:after {
+	animation: borderhvr2 .3s linear forwards;
+}
+
+
+.btn-book-service {
+	position: relative;
+	display: inline-block;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	padding: 10px 20px;
+	background-image: -webkit-linear-gradient(left, #29d0d2, #0095f4);
+	background-image: -o-linear-gradient(left, #29d0d2, #0095f4);
+	background-image: linear-gradient(to right, #29d0d2, #0095f4);
+	border: 1px solid #26C4D5;
+	border-radius: 24px;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-family: Roboto;
+	color: #fff;
+	text-shadow: 1px 1px rgba(255,255,255,.3);
+	box-shadow: 0 2px 10px rgba(0,0,0,.2);
+	transition: all 1s;
+}
+.btn-book-service:hover,
+.btn-book-service:focus {
+	color: #fff;
+	text-decoration: none;
+	background-image: linear-gradient(to right, rgba(38,196,213,.5), rgba(38,196,213,1));
+}
+
+
+.btn-gallery {
+	position: relative;
+	padding: 10px 27px;
+	border: 1px solid #26C4D5;
+	border-radius: 24px;
+	background: #fff;
+	box-shadow: 0 2px 5px #ccc;
+	transition: all .3s;
+}
+.btn-gallery:hover,
+.btn-gallery:focus {
+	background: linear-gradient(to right, #29d0d2, #0095f4);
+	font-weight: bold;
+	color: #fff;
+}
+.current {
+	background: linear-gradient(to right, #29d0d2, #0095f4);
+	font-weight: bold;
+	color: #fff;
+}
