@@ -168,7 +168,7 @@
 							@foreach($listRoom as $key => $value)
 							<tr>
 								<td>{{$value->RoomName}}</td>
-								<td>{{$value->getRoomType->RoomTypeName}}</td>
+								<td>{{var_dump($value->getRoomType)}}</td>
 								<td>10</td>
 								<td>10</td>
 								<td class="btn-choose">
@@ -178,7 +178,7 @@
 									type="button"
 									class="btn btn-warning"
 									target-name="{{$value->RoomName}}"
-									target-typeroom="{{$value->getRoomType->RoomTypeName}}"
+									{{-- target-typeroom="{{$value->getRoomType->RoomTypeName}}" --}}
 									data-id_room="{{$value->RoomId}}">
 									Chọn phòng
 									</button>
