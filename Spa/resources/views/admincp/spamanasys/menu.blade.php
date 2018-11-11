@@ -12,8 +12,8 @@
 		data-menu-scrollable="false" data-menu-dropdown-timeout="500"  
 		>
 		<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
-			<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >
-				<a  href="index.html" class="m-menu__link ">
+			<li class="@yield('MenuBar_DashBoard')" aria-haspopup="true" >
+				<a  href="{{ route('spa_showDashBoard') }}" class="m-menu__link ">
 					<i class="m-menu__link-icon flaticon-line-graph"></i>
 					<span class="m-menu__link-title">
 						<span class="m-menu__link-wrap">
@@ -31,15 +31,15 @@
 			</li>
 			<li class="m-menu__section">
 				<h4 class="m-menu__section-text">
-					Components
+					Quản lý dịch vụ
 				</h4>
 				<i class="m-menu__section-icon flaticon-more-v3"></i>
 			</li>
-			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+			<li class="@yield('MenuBar_TitleBookingForCustomer')" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="#" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-layers"></i>
 					<span class="m-menu__link-text">
-						Base
+						Đăng ký cho khách hàng
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
@@ -49,17 +49,17 @@
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
 							<a  href="#" class="m-menu__link ">
 								<span class="m-menu__link-text">
-									Base
+									Đăng ký cho khách hàng
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/base/treeview.html" class="m-menu__link ">
+						<li class="@yield('MenuBar_BookingForCustomer')" aria-haspopup="true" >
+							<a  href="{{route('spa_showBooking')}}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
 								</i>
 								<span class="m-menu__link-text">
-									Tree View
+									Đăng ký dịch vụ
 								</span>
 							</a>
 						</li>
@@ -80,60 +80,6 @@
 								</i>
 								<span class="m-menu__link-text">
 									Toastr
-								</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-				<a  href="#" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-share"></i>
-					<span class="m-menu__link-text">
-						Icons
-					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
-				</a>
-				<div class="m-menu__submenu">
-					<span class="m-menu__arrow"></span>
-					<ul class="m-menu__subnav">
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/icons/flaticon.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Flaticon
-								</span>
-							</a>
-						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/icons/fontawesome.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Fontawesome
-								</span>
-							</a>
-						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/icons/lineawesome.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Lineawesome
-								</span>
-							</a>
-						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/icons/socicons.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Socicons
 								</span>
 							</a>
 						</li>
@@ -347,169 +293,6 @@
 											</i>
 											<span class="m-menu__link-text">
 												Pricing Tables v3
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-				<a  href="#" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-suitcase"></i>
-					<span class="m-menu__link-text">
-						Custom Pages
-					</span>
-					<i class="m-menu__ver-arrow la la-angle-right"></i>
-				</a>
-				<div class="m-menu__submenu">
-					<span class="m-menu__arrow"></span>
-					<ul class="m-menu__subnav">
-						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
-							<a  href="#" class="m-menu__link ">
-								<span class="m-menu__link-text">
-									Custom Pages
-								</span>
-							</a>
-						</li>
-						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-							<a  href="#" class="m-menu__link m-menu__toggle">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									User Pages
-								</span>
-								<i class="m-menu__ver-arrow la la-angle-right"></i>
-							</a>
-							<div class="m-menu__submenu">
-								<span class="m-menu__arrow"></span>
-								<ul class="m-menu__subnav">
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/user/login-1.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Login - 1
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/user/login-2.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Login - 2
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/user/login-3.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Login - 3
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/user/login-4.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Login - 4
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/user/login-5.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Login - 5
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</li>
-						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-							<a  href="#" class="m-menu__link m-menu__toggle">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Error Pages
-								</span>
-								<i class="m-menu__ver-arrow la la-angle-right"></i>
-							</a>
-							<div class="m-menu__submenu">
-								<span class="m-menu__arrow"></span>
-								<ul class="m-menu__subnav">
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-1.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 1
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-2.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 2
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-3.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 3
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-4.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 4
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-5.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 5
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a target="_blank" href="snippets/pages/errors/error-6.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Error 6
 											</span>
 										</a>
 									</li>

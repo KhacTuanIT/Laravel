@@ -18,6 +18,8 @@
 	<link href="assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Base Styles -->
 	<link rel="shortcut icon" href="assets/demo/default/media/img/logo/favicon.ico" />
+	@yield('script_header')
+
 </head>
 <!-- end::Head -->
 <!-- end::Body -->

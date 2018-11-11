@@ -16,11 +16,13 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admincp'],function(){
-	Route::get('/','BackEnd\AdminCPLogin@showLogin')->name('admincp_showLogin');
+	Route::get('/','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
 	Route::get('login','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
 
 	Route::group(['prefix' => 'spa'],function(){
 		Route::get('/','AdminCP\SpaManagementSystem\DashboardController@showDashBoard')->name('spa_showDashBoard');
 		Route::get('/dashboard','AdminCP\SpaManagementSystem\DashboardController@showDashBoard')->name('spa_showDashBoard');
+		Route::get('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@showBooking')->name('spa_showBooking');
+		Route::post('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@booking')->name('spa_Booking');
 	});
 });

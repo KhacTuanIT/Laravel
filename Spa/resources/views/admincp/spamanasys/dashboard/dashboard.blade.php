@@ -1,5 +1,13 @@
 @extends('admincp.spamanasys.master')
 
+{{-- MENU BAR --}}
+@section('MenuBar_DashBoard','m-menu__item  m-menu__item--active')
+@section('MenuBar_TitleBookingForCustomer','m-menu__item m-menu__item--submenu')
+@section('MenuBar_BookingForCustomer','m-menu__item')
+{{-- END MENU BAR --}}
+
+
+
 @section('titlePage','Bảng điều khiển Spa')
 @section('headTitle','Bảng điều khiển')
 
