@@ -10,6 +10,6 @@ class RoomType extends Model
     public $timestamps = false;
 
     public function getRoom(){
-    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\ListRoom','RoomTypeId','RoomType');
+    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\ListRoom','RoomType','RoomTypeId');
     }
 }
