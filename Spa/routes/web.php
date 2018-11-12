@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 Route::get('login',function(){
 	return view('login');
 });
@@ -23,7 +22,6 @@ Route::get('login',function(){
 Route::get('/contact', function() {
 	return view('contact');
 });
-=======
 Route::group(['prefix' => 'admincp'],function(){
 	Route::get('/','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
 	Route::get('login','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
@@ -35,4 +33,3 @@ Route::group(['prefix' => 'admincp'],function(){
 		// Route::post('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@booking')->name('spa_Booking');
 	});
 });
->>>>>>> thinh_dev
