@@ -507,6 +507,7 @@
 @endsection
 
 @push('script')
+<script src="assets/js/load-page.js"></script>
 <script src="assets/dist/wow.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn9vJtX9_E8tMRatRJjWZ2OGkII0z0LHo"></script>

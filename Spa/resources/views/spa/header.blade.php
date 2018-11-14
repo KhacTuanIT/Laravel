@@ -1,3 +1,6 @@
+<div id="preloader">
+  	<div id="status">&nbsp;</div>
+</div>
 <nav class="navbar navbar-spa" id="navbar">
 	<div class="container full-nav">
 		<div class="collapse navbar-collapse">
