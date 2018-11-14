@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('spa.page.index');
 });
 
-Route::get('/contact', function() {
-	return view('contact');
-});
+
+
+
