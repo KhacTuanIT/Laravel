@@ -143,7 +143,7 @@
 		<!--End::Main Portlet-->
 		<!--Begin::Main Portlet-->
 		<div class="row">
-			<div class="col-xl-8">
+			<div class="col-xl-7">
 				<!--begin:: Widgets/Best Sellers-->
 				<div class="m-portlet m-portlet--full-height ">
 					<div class="m-portlet__head">
@@ -253,7 +253,7 @@
 				</div>
 				<!--end:: Widgets/Best Sellers-->
 			</div>
-			<div class="col-xl-4">
+			<div class="col-xl-5">
 				<!--begin:: Widgets/Authors Profit-->
 				<div class="m-portlet">
 					<div class="m-portlet__head">
@@ -301,44 +301,28 @@
 													Loại phòng
 												</th>
 												<th>
-													Chỗ trống/tổng
+													Chỗ trống
 												</th>
 											</tr>
 										</thead>
 										<tbody>
+											@foreach($listRoom as $value)
 											<tr>
 												<td>
-													Jhon
+													{{$value->RoomName}}
 												</td>
 												<td>
-													Stone
+													{{$value->getRoomType->RoomTypeName}}
 												</td>
 												<td>
-													@jhon
+													@if($value->RoomBlank == 0)
+													{!!$value->RoomBlank = "<span class='m-badge m-badge--danger m-badge--wide'>Đã hết</span>" !!} 
+													@else
+													{!! "<span class='m-badge m-badge--info m-badge--wide'>".$value->RoomBlank."</span>" !!}
+													@endif
 												</td>
 											</tr>
-											<tr>
-												<td>
-													Lisa
-												</td>
-												<td>
-													Nilson
-												</td>
-												<td>
-													@lisa
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Larry
-												</td>
-												<td>
-													the Bird
-												</td>
-												<td>
-													@twitter
-												</td>
-											</tr>
+											@endforeach
 										</tbody>
 									</table>
 								</div>
@@ -356,44 +340,28 @@
 														Trạng thái
 													</th>
 													<th>
-														Phòng làm việc
+														Phòng đang làm việc
 													</th>
 												</tr>
 											</thead>
 											<tbody>
+												@foreach($listStaff as $value)
 												<tr>
 													<td>
-														Jhon
+														{{$value->StaffName}}
 													</td>
 													<td>
-														Stone
+														@if($value->StaffActive == 0)
+														{!!$value->StaffActive = "<span class='m-badge m-badge--info m-badge--wide'>Đang rãnh</span>"!!}
+														@else 
+															{!!$value->StaffActive = "<span class='m-badge m-badge--danger m-badge--wide'>Đang bận</span>"!!}
+														@endif
 													</td>
 													<td>
-														@jhon
+														{{$value->getRoom->RoomName}}
 													</td>
 												</tr>
-												<tr>
-													<td>
-														Lisa
-													</td>
-													<td>
-														Nilson
-													</td>
-													<td>
-														@lisa
-													</td>
-												</tr>
-												<tr>
-													<td>
-														Larry
-													</td>
-													<td>
-														the Bird
-													</td>
-													<td>
-														@twitter
-													</td>
-												</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>
@@ -652,8 +620,11 @@
 							<th>
 								Phòng
 							</th>
-							<th>
+{{-- 							<th>
 								Thời gian vào
+							</th> --}}
+							<th>
+								Thời gian
 							</th>
 							<th>
 								Hành động
@@ -661,59 +632,56 @@
 						</tr>
 					</thead>
 					<tbody>
+						@foreach($customerBooking as $value)
 						<tr>
 							<td scope="row">
-								16590-107
+								{{$value->CustomerBookingId}}
 							</td>
 							<td>
-								Zandra Fisbburne
+								{{$value->CustomerName}}
 							</td>
 							<td>
-								(916) 6137523
+								{{$value->CustomerPhoneNumber}}
 							</td>
 							<td>
-								Pontiac
+								{{$value->getServices->ServicesName}}
 							</td>
 							<td>
-								Grand Am
+								{{$value->getStaff->StaffName}}
 							</td>
 							<td>
-								Puce
+								{{$value->getRoom->RoomName}}
 							</td>
-							<td>
+{{-- 							<td>
 								<span style="width: 110px;"><span class="m-badge m-badge--success m-badge--wide">
 								Info</span></span>
-							</td>
+							</td> --}}
 							<td>
-								2016-09-08
+								{{date("H:i d-m-Y",strtotime($value->CustomerBookingTime	))}}
 							</td>
-						</tr>
-						<tr>
-							<td scope="row">
-								58232-0517
+							<td data-field="Actions" class="m-datatable__cell">
+								<span style="overflow: visible; width: 110px;">						
+									<div class="dropdown ">							
+										<a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">
+											<i class="la la-ellipsis-h"></i>                            
+										</a>						  	
+										<div class="dropdown-menu dropdown-menu-right">						    	<a class="dropdown-item" href="#">
+											<i class="la la-edit"></i> Edit Details
+											</a>						    	
+											<a class="dropdown-item" href="#">
+												<i class="la la-leaf"></i>
+											Update Status
+											</a>						    	
+											<a class="dropdown-item" href="#">
+												<i class="la la-print"></i> 
+												Generate Report
+											</a>						  	
+										</div>						
+									</div>                     
+								</span>
 							</td>
-							<td>
-								Mela Ord
-							</td>
-							<td>
-								(331) 6613809
-							</td>
-							<td>
-								Lamborghini
-							</td>
-							<td>
-								Gallardo
-							</td>
-							<td>
-								Aquamarine
-							</td>
-							<td>
-								$46031.10
-							</td>
-							<td>
-								2016-08-21
-							</td>
-						</tr>
+						</tr>	
+						@endforeach
 					</tbody>
 				</table>
 				<!--end: Datatable -->
@@ -723,7 +691,6 @@
 
 @endsection
 
-@section('script')
+@push('scripts')
 <script src="assets/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>
-
-@endsection
+@endpush

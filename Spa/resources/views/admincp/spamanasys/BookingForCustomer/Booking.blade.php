@@ -15,18 +15,25 @@
 	<!--Begin::Main Portlet-->
 	<div class="row">
 		<div class="col-xl-7">
+		@include('admincp.spamanasys.notifications.notifications')
+			{{-- <div class="alert alert-success"">
+				<ul>
+					 <li></li>
+				</ul>
+			</div>  --}}
 			<!--begin:: Widgets/Best Sellers-->
-			<div class="m-portlet m-portlet--full-height ">
+			<div class="m-portlet m-portlet--full-height " >
 				<div class="m-portlet__head">
 					<div class="m-portlet__head-caption">
 						<div class="m-portlet__head-title">
 							<h3 class="m-portlet__head-text">
-								ĐĂNG KÝ PHỤC VỤ CHO KHÁCH HÀNG
+								ĐĂNG KÝ DỊCH VỤ CHO KHÁCH HÀNG
 							</h3>
 						</div>
 					</div>
 				</div>
 				<div class="m-portlet__body">
+
 					<!--begin::Content-->
 					<div class="tab-content">
 						<div class="tab-pane active" id="m_widget5_tab1_content" aria-expanded="true">
@@ -34,13 +41,20 @@
 							<div class="m-widget5">
 								<div class="m-widget5__item">
 									<div class="m-widget1__item">
-										<form action="" method="POST" class="m-form m-form--fit m-form--label-align-right">
+										<form action="{{route('spa_Booking')}}" method="POST" class="m-form m-form--fit m-form--label-align-right">
+											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<div class="form-group m-form__group row">
 												<label class="col-form-label col-lg-3 col-sm-3">
 													Tên khách hàng
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<input class="form-control m-input" name="CustomerName" type="text" value="" id="example-text-input">
+													<input class="form-control m-input" name="CustomerName" type="text" value="{{old('CustomerName')}}" required>
+													@if($errors->has('CustomerName'))
+														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
+															{{$errors->first('CustomerName')}}
+
+														</span>
+													@endif
 												</div>
 											</div>
 											<div class="form-group m-form__group row">
@@ -48,7 +62,12 @@
 													SĐT:
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<input class="form-control m-input" name="CustomerPhoneNumber" type="text" value="" id="example-text-input">
+													<input class="form-control m-input" name="CustomerPhoneNumber" type="text" value="{{old('CustomerPhoneNumber')}}" required>
+													@if($errors->has('CustomerPhoneNumber'))
+														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
+															{{$errors->first('CustomerPhoneNumber')}}
+														</span>
+													@endif
 												</div>
 											</div>
 											<div class="form-group m-form__group row">
@@ -56,11 +75,16 @@
 													Gói dịch vụ
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<select name="Services" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true">
-													@foreach($listServices as $key => $value)
-														<option value="{{$value->ServicesId}}">{{$value->ServicesName}}</option>
-													@endforeach()
+													<select name="ServicesId" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
+														@foreach($listServices as $value)
+															<option value="{{$value->ServicesId}}" {{ old('ServicesId') == $value->ServicesId ? "selected" : "" }}  >{{$value->ServicesName}}</option>
+														@endforeach()
 													</select>
+													@if($errors->has('ServicesId'))
+														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
+															{{$errors->first('ServicesId')}}
+														</span>
+													@endif
 												</div>
 											</div>
 											<div class="form-group m-form__group row">
@@ -68,27 +92,35 @@
 													Nhân viên tiếp nhận
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<select name="StaffReceive" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
-														<option value="">-- Chọn nhân viên --</option>
-														@foreach($listStaff as $key => $value)
-														<option value="{{$value->StaffId}}">{{$value->StaffName}}</option>
-													@endforeach()
+													<select name="StaffId" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
+														@foreach($listStaff as $value)
+														<option value="{{$value->StaffId}}" {{ old('StaffId') == $value->StaffId ? "selected" : "" }}>{{$value->StaffName}}</option>
+														@endforeach()
 													</select>
+													@if($errors->has('StaffId'))
+														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
+															{{$errors->first('StaffId')}}
+														</span>
+													@endif
 												</div>
 											</div>
-
 											<div class="form-group m-form__group row">
 												<label class="col-lg-3 col-sm-3" style="padding: 0">
-													<a class="btn btn-warning" id="btn-select-room"data-toggle="modal" data-target="#listroom">
+													<a class="btn btn-warning" id="btn-select-room" data-toggle="modal" data-target="#listroom">
 														Chọn phòng
 													</a>
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<input class="form-control m-input" name="RoomId" type="hidden" value="" >
-													<input class="form-control m-input" name="room_name" type="text" value="" disabled >
+													<input class="form-control m-input" name="RoomId" type="hidden" value="">
+													<input class="form-control m-input" name="room_name" type="text" value="" disabled required>
+													@if($errors->has('RoomId'))
+														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
+															{{$errors->first('RoomId')}}
+														</span>
+													@endif
 												</div>
 											</div>
-											<center><button type="submit" class="btn btn-primary"/>Đăng ký dịch vụ</center>
+											<center><button type="submit" class="btn btn-primary"/>Đăng ký dịch vụ</button></center>
 										</form>
 									</div>
 								</div>
@@ -169,8 +201,15 @@
 							<tr>
 								<td>{{$value->RoomName}}</td>
 								<td>{{$value->getRoomType->RoomTypeName}}</td>
-								<td>10</td>
-								<td>10</td>
+								<td>{{$value->getRoomType->RoomTypeCapacity}}</td>
+							
+								<td>
+									@if($value->RoomBlank == 0)
+									{!!$value->RoomBlank = "<span style='color:red;font-weight:bold'>Đã hết chỗ trống</span>" !!} 
+									@else
+									{{$value->RoomBlank}}
+									@endif
+								</td>
 								<td class="btn-choose">
 									<button
 									id="{{$value->RoomId}}"
@@ -205,8 +244,9 @@
 
 @endsection
 
-@section('script')
-<script type="text/javascript">
+@push('scripts')
+	<script type="text/javascript">
+		
 	$(document).ready(function() {
 		var count = 0;
 
@@ -237,27 +277,98 @@
 			var room_name = $(this).attr("target-name");
 			var typeroom = $(this).attr("target-typeroom");
 			// alert(room_name +" có ID: "+room_id);
-					$('input[name="room_id"]').val(room_id);
+					$('input[name="RoomId"]').val(room_id);
 					$('input[name="room_name"]').val(room_name+" ["+typeroom+"]");
 			// alert(test);
 		});
 	});
-</script>
-{{-- <script type="text/javascript">
-	$(document).ready(function(){
-		$.ajax({
-			url: window.location.href,
-			type: 'POST',
-			dataType: 'JSON',
-			success: function(data){
-				console.log(data);
-				console.log(data.vi);
-			}
-		});
-	});
-</script> --}}
-@endsection
+	
+	// $.ajaxSetup({
+	// 	headers: {
+	// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+ //        }
+	// });
 
-@section('script_header')
-	<script src="js/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-@endsection
+	// $(document).ready(function(){
+	// 	$("#submit").click(function(e){
+	// 		var CustomerName = $('#CustomerName').val(); 
+	// 		var CustomerPhoneNumber = $('#CustomerPhoneNumber').val();
+	// 		var ServicesId = 0;
+	// 		var StaffId = 0;
+	// 		var RoomId = $('#RoomId').val();
+	// 		ServicesId = $( "#ServicesId option:selected" ).val();
+	// 		StaffId = $( "#StaffId option:selected" ).val();
+
+	// 		$.ajax({
+	// 			url: '{{ route('spa_Booking') }}',
+	// 			type: 'POST',
+	// 			dataType: 'JSON',
+	// 			data:{
+	// 				CustomerName : CustomerName,
+	// 				CustomerPhoneNumber: CustomerPhoneNumber,
+	// 				ServicesId: ServicesId,
+	// 				StaffId: StaffId,
+	// 				RoomId: RoomId,
+	// 			},
+	// 			success: function(data){
+	// 				console.log(data);
+	// 				$('.alert-danger').hide();
+	// 				$('.alert-success').show();
+	// 				$(".success-message").html(data.success);
+	// 				$("#formReg")[0].reset();
+
+	// 				// $('#CustomerName').val("");
+	// 				// $('#CustomerPhoneNumber').val("");
+	// 				// $('#RoomId').val("");
+	// 				// $('input[name="room_name"]').val("");
+	// 				// $("#ServicesId").val("").selectpicker("refresh");
+	// 				// $("#StaffId").val("").selectpicker("refresh");
+	// 				// $('.btn-choose').children().removeClass("btn-success activate");
+	// 				// $('.btn-choose').children().addClass("btn-warning").text("Chọn phòng");
+	// 				$('.alert-success').delay(7000).fadeOut('slow');
+	// 			},
+	// 			error: function(data){
+	// 				console.log(data);
+	// 				$('.alert-success').hide();
+	// 				var errors = $.parseJSON(data.responseText);
+	// 				// $('.errors-customername').text("");
+	// 				// $('.errors-customerphonenumber').text("");
+	// 				// $('.errors-servicesid').text("");
+	// 				// $('.errors-staffid').text("");
+	// 				// $('.errors-roomid').text("");
+					
+	// 				// $('.alert-danger').show();
+	// 				$('.errors-customername').text(errors['CustomerName']);
+	// 				$('.errors-customerphonenumber').text(errors['CustomerPhoneNumber']);
+	// 				$('.errors-servicesid').text(errors['ServicesId']);
+	// 				$('.errors-staffid').text(errors['StaffId']);
+	// 				$('.errors-roomid').text(errors['RoomId']);
+	// 				$('#CustomerName').keyup(function() {
+	// 					$(this).parent().children('span').text('');
+	// 				});
+	// 				$('#CustomerPhoneNumber').keyup(function() {
+	// 					$(this).parent().children('span').text('');
+	// 				});
+	// 				$('#ServicesId').change(function() {
+	// 					$('.errors-servicesid').text("");
+	// 				});
+	// 				$('#StaffId').change(function() {
+	// 					$('.errors-staffid').text("");
+	// 				});
+
+	// 				$('#btn-select-room').click(function() {
+	// 					$('.errors-roomid').text("");
+	// 				});
+	// 			}
+	// 		});
+	// 	});
+	// });
+
+</script>
+<script src="assets/demo/default/custom/components/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
+
+@endpush
+
+@push('script_header')
+	<script src="js/jquery-3.3.1.min.js"></script>
+@endpush

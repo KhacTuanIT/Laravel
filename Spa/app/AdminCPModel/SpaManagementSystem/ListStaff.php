@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class ListStaff extends Model
 {
     protected $table = "spams_staff";
-    public $timestamps = false;}
+    protected $primaryKey = "StaffId";
+
+    public $timestamps = false;
+
+    public function getRoom(){
+    	return $this->hasOne('App\AdminCPModel\SpaManagementSystem\ListRoom','RoomId','StaffWorkAtRoomId');
+    }
+}

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class ListRoom extends Model
 {
     protected $table = "spams_room";
+    protected $primaryKey = "RoomId";
+
     public $timestamps = false;
 
     public function getRoomType(){
