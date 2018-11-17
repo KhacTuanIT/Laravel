@@ -10,6 +10,7 @@
 	<meta name="description" content="Latest updates and statistic charts">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	@stack('meta_code')
 	<!--begin::Base Styles -->  
 	<!--begin::Page Vendors -->
 	<link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -18,7 +19,9 @@
 	<link href="assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Base Styles -->
 	<link rel="shortcut icon" href="assets/demo/default/media/img/logo/favicon.ico" />
-	@yield('script_header')
+	{{-- <script src="js/jquery-3.3.1.min.js"></script> --}}
+
+	@stack('script_header')
 
 </head>
 <!-- end::Head -->
@@ -691,7 +694,6 @@
 	<!--begin::Base Scripts -->
 	<script src="assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
 	<script src="assets/demo/default/base/scripts.bundle.js" type="text/javascript"></script>
-	<script src="assets/demo/default/custom/components/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
 
 	<!--end::Base Scripts -->   
 	<!--begin::Page Vendors -->
@@ -701,7 +703,7 @@
 	<script src="assets/app/js/dashboard.js" type="text/javascript"></script>
 	<!--end::Page Snippets -->
 	<!--begin::Custom page JS -->
-	@yield('script')
+    @stack('scripts')
 	<!--end::Custom page JS-->
 
 </body>

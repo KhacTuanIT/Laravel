@@ -39,7 +39,7 @@
 				<a  href="#" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-layers"></i>
 					<span class="m-menu__link-text">
-						Đăng ký cho khách hàng
+						Khách hàng
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
@@ -49,7 +49,7 @@
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
 							<a  href="#" class="m-menu__link ">
 								<span class="m-menu__link-text">
-									Đăng ký cho khách hàng
+									Khách hàng
 								</span>
 							</a>
 						</li>
@@ -64,12 +64,12 @@
 							</a>
 						</li>
 						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/base/bootstrap-notify.html" class="m-menu__link ">
+							<a  href="{{ route('spa_showCustomer') }}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
 								</i>
 								<span class="m-menu__link-text">
-									Bootstrap Notify
+									Khách đang được phục vụ
 								</span>
 							</a>
 						</li>
