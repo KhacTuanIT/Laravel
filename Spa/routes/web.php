@@ -24,6 +24,9 @@ Route::group(['prefix' => 'admincp'],function(){
 		Route::get('/dashboard','AdminCP\SpaManagementSystem\DashboardController@showDashBoard')->name('spa_showDashBoard');
 		Route::get('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@showBooking')->name('spa_showBooking');
 		Route::post('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@booking')->name('spa_Booking');
-		Route::get('frmBooking','AdminCP\SpaManagementSystem\BookingForCustomerController@frmBooking')->name('spa_frm_Booking');
+		Route::get('/customer','AdminCP\SpaManagementSystem\CustomerBookingController@showCustomer')->name('spa_showCustomer');
+		Route::get('/customer/{id}','AdminCP\SpaManagementSystem\CheckoutController@showCheckout')->name('spa_showCheckout');
+		Route::get('/detailcustomer/{id}','AdminCP\SpaManagementSystem\CustomerBookingController@showDetail')->name('spa_showDetailCustomer');
+		Route::get('/frmDetail/{id}','AdminCP\SpaManagementSystem\CustomerBookingController@showFormEditDetail')->name('spa_showfrmEditDetail');
 	});
 });

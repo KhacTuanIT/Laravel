@@ -33,7 +33,6 @@
 					</div>
 				</div>
 				<div class="m-portlet__body">
-
 					<!--begin::Content-->
 					<div class="tab-content">
 						<div class="tab-pane active" id="m_widget5_tab1_content" aria-expanded="true">
@@ -72,19 +71,21 @@
 											</div>
 											<div class="form-group m-form__group row">
 												<label class="col-form-label col-lg-3 col-sm-3">
-													Gói dịch vụ
+													Giới tính:
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<select name="ServicesId" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
-														@foreach($listServices as $value)
-															<option value="{{$value->ServicesId}}" {{ old('ServicesId') == $value->ServicesId ? "selected" : "" }}  >{{$value->ServicesName}}</option>
-														@endforeach()
-													</select>
-													@if($errors->has('ServicesId'))
-														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
-															{{$errors->first('ServicesId')}}
-														</span>
-													@endif
+													<div class="m-radio-inline">
+														<label class="m-radio m-radio--bold m-radio--state-info">
+															<input type="radio" name="gender" value="1" checked>
+															Nam
+															<span></span>
+														</label>
+														<label class="m-radio m-radio--bold m-radio--state-danger">
+															<input type="radio" name="gender" value="0">
+															Nữ
+															<span></span>
+														</label>
+													</div>
 												</div>
 											</div>
 											<div class="form-group m-form__group row">
@@ -93,7 +94,7 @@
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
 													<select name="StaffId" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
-														@foreach($listStaff as $value)
+														@foreach($staff as $value)
 														<option value="{{$value->StaffId}}" {{ old('StaffId') == $value->StaffId ? "selected" : "" }}>{{$value->StaffName}}</option>
 														@endforeach()
 													</select>
@@ -105,14 +106,39 @@
 												</div>
 											</div>
 											<div class="form-group m-form__group row">
+												<label class="col-form-label col-lg-3 col-sm-3">
+													Gói dịch vụ
+												</label>
+												<div class="col-lg-7 col-md-9 col-sm-12">
+													<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+														Danh sách dịch vụ
+													</button>
+													<div class="collapse" id="collapseExample">
+														<div class="card card-body">
+															<div class="m-checkbox-list">
+																@foreach($services as $value)
+																<label class="m-checkbox">
+																	<input type="checkbox" name="ServicesId[]"  value="{{$value->ServicesId}}" 
+																	@if(is_array(old('ServicesId')) && in_array($value->ServicesId, old('ServicesId'))) checked @endif
+																	>
+																	{{$value->ServicesName}}
+																	<span></span>
+																</label>
+																@endforeach
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>	
+											<div class="form-group m-form__group row">
 												<label class="col-lg-3 col-sm-3" style="padding: 0">
 													<a class="btn btn-warning" id="btn-select-room" data-toggle="modal" data-target="#listroom">
 														Chọn phòng
 													</a>
 												</label>
 												<div class="col-lg-7 col-md-9 col-sm-12">
-													<input class="form-control m-input" name="RoomId" type="hidden" value="">
-													<input class="form-control m-input" name="room_name" type="text" value="" disabled required>
+													<input class="form-control m-input" name="RoomId" value="{{old('RoomId')}}" type="hidden">
+													<input class="form-control m-input m-input--solid" name="room_name" value="{{old('room_name')}}" type="text" readonly>
 													@if($errors->has('RoomId'))
 														<span class="m-form__help errors-customername" style="color: red;font-weight: bold">
 															{{$errors->first('RoomId')}}
@@ -156,7 +182,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($listServices as $key => $value)
+								@foreach($services as $key => $value)
 								<tr>
 									<td>{{$value->ServicesName}}</td>
 									<td>30 phút</td>
@@ -197,12 +223,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($listRoom as $key => $value)
+							@foreach($room as $key => $value)
 							<tr>
 								<td>{{$value->RoomName}}</td>
 								<td>{{$value->getRoomType->RoomTypeName}}</td>
 								<td>{{$value->getRoomType->RoomTypeCapacity}}</td>
-							
 								<td>
 									@if($value->RoomBlank == 0)
 									{!!$value->RoomBlank = "<span style='color:red;font-weight:bold'>Đã hết chỗ trống</span>" !!} 
@@ -223,7 +248,7 @@
 									</button>
 								</td>								
 							</tr>
-						@endforeach
+							@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -300,7 +325,7 @@
 	// 		StaffId = $( "#StaffId option:selected" ).val();
 
 	// 		$.ajax({
-	// 			url: '{{ route('spa_Booking') }}',
+	// 			url: '{{-- route('spa_Booking') --}}',
 	// 			type: 'POST',
 	// 			dataType: 'JSON',
 	// 			data:{

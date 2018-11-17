@@ -19,6 +19,8 @@
 	<link href="assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Base Styles -->
 	<link rel="shortcut icon" href="assets/demo/default/media/img/logo/favicon.ico" />
+	{{-- <script src="js/jquery-3.3.1.min.js"></script> --}}
+
 	@stack('script_header')
 
 </head>

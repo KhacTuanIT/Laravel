@@ -11,15 +11,37 @@ class CustomerBooking extends Model
     // public $timestamps = true;
     const CREATED_AT = 'CustomerBookingTime';
 
+    // public function getServices(){
+    // 	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Services','ServicesId','ServicesId');
+    // }
+
+    // public function getStaff(){
+    // 	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Staff','StaffId','StaffId');
+    // }
+
+    // public function getRoom(){
+    // 	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Room','RoomId','RoomId');
+    // }
+
     public function getServices(){
-    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\ListServices','ServicesId','ServicesId');
+        return $this->belongsToMany('App\AdminCPModel\SpaManagementSystem\Services','CustomerBookingDetail','CustomerBookingId','CustomerBookingDetailId');
+    }
+
+    public function getSv(){
+        return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\CustomerBookingDetail','CustomerBookingId','CustomerBookingId');
+    }
+
+    public function getCustomer(){
+        return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Customer','CustomerId','CustomerId');
+    }
+    
+    public function getRoom(){
+        return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Room','RoomId','RoomId');
     }
 
     public function getStaff(){
-    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\ListStaff','StaffId','StaffId');
+        return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Staff','StaffId','StaffId');
     }
 
-    public function getRoom(){
-    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\ListRoom','RoomId','RoomId');
-    }
+
 }

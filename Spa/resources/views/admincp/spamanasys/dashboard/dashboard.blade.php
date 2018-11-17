@@ -27,25 +27,25 @@
 								<div class="m-widget24">
 									<div class="m-widget24__item">
 										<h4 class="m-widget24__title">
-											Total Frofit
+											Khách hàng
 										</h4>
 										<br>
 										<span class="m-widget24__desc">
-											All Customs Value
+											Đang trong Spa
 										</span>
 										<span class="m-widget24__stats m--font-brand">
-											$17,800
+											{{$customerBooking->count()}}
 										</span>
 										<div class="m--space-10"></div>
 										<div class="progress m-progress--sm">
-											<div class="progress-bar m--bg-brand" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar m--bg-brand" role="progressbar" style="width:100% ;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
-										<span class="m-widget24__change">
+										{{-- <span class="m-widget24__change">
 											Change
-										</span>
-										<span class="m-widget24__number">
+										</span> --}}
+										{{-- <span class="m-widget24__number">
 											78%
-										</span>
+										</span> --}}
 									</div>
 								</div>
 								<!--end::Total Profit-->
@@ -55,24 +55,24 @@
 								<div class="m-widget24">
 									<div class="m-widget24__item">
 										<h4 class="m-widget24__title">
-											New Feedbacks
+											Nhân viên
 										</h4>
 										<br>
 										<span class="m-widget24__desc">
-											Customer Review
+											Đang làm việc
 										</span>
 										<span class="m-widget24__stats m--font-info">
-											1349
+											{{$ovvStaffActive}}
 										</span>
 										<div class="m--space-10"></div>
 										<div class="progress m-progress--sm">
-											<div class="progress-bar m--bg-info" role="progressbar" style="width: 84%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar m--bg-info" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<span class="m-widget24__change">
-											Change
+											Tổng nhân viên
 										</span>
-										<span class="m-widget24__number">
-											84%
+										<span class="m-widget24__stats m--font-info" style="padding-top: 4%">
+											2
 										</span>
 									</div>
 								</div>
@@ -83,18 +83,18 @@
 								<div class="m-widget24">
 									<div class="m-widget24__item">
 										<h4 class="m-widget24__title">
-											New Orders
+											Khách đã nhận
 										</h4>
 										<br>
 										<span class="m-widget24__desc">
-											Fresh Order Amount
+											Trong ngày
 										</span>
 										<span class="m-widget24__stats m--font-danger">
 											567
 										</span>
 										<div class="m--space-10"></div>
 										<div class="progress m-progress--sm">
-											<div class="progress-bar m--bg-danger" role="progressbar" style="width: 69%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+											<div class="progress-bar m--bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 										</div>
 										<span class="m-widget24__change">
 											Change
@@ -306,7 +306,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											@foreach($listRoom as $value)
+											@foreach($room as $value)
 											<tr>
 												<td>
 													{{$value->RoomName}}
@@ -345,7 +345,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												@foreach($listStaff as $value)
+												@foreach($staff as $value)
 												<tr>
 													<td>
 														{{$value->StaffName}}
@@ -574,7 +574,7 @@
 							<div class="form-group m-form__group row align-items-center">
 								<div class="col-md-4">
 									<div class="m-input-icon m-input-icon--left">
-										<input type="text" class="form-control m-input m-input--solid" placeholder="Search..." id="generalSearch">
+										<input type="text" class="form-control m-input m-input--solid" placeholder="Tìm kiếm..." id="generalSearch">
 										<span class="m-input-icon__icon m-input-icon__icon--left">
 											<span>
 												<i class="la la-search"></i>
@@ -644,7 +644,7 @@
 								{{$value->CustomerPhoneNumber}}
 							</td>
 							<td>
-								{{$value->getServices->ServicesName}}
+								{{-- {{$value->getServices->ServicesName}} --}}
 							</td>
 							<td>
 								{{$value->getStaff->StaffName}}
@@ -657,7 +657,7 @@
 								Info</span></span>
 							</td> --}}
 							<td>
-								{{date("H:i d-m-Y",strtotime($value->CustomerBookingTime	))}}
+								{{date("H:i d-m-Y",strtotime($value->CustomerBookingTime))}}
 							</td>
 							<td data-field="Actions" class="m-datatable__cell">
 								<span style="overflow: visible; width: 110px;">						

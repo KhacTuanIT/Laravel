@@ -5,17 +5,21 @@ namespace App\Http\Controllers\AdminCP\SpaManagementSystem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use App\AdminCPModel\SpaManagementSystem\ListRoom;
-use App\AdminCPModel\SpaManagementSystem\ListServices;
-use App\AdminCPModel\SpaManagementSystem\ListStaff;
+use App\AdminCPModel\SpaManagementSystem\Room;
+use App\AdminCPModel\SpaManagementSystem\Services;
+use App\AdminCPModel\SpaManagementSystem\Staff;
 use App\AdminCPModel\SpaManagementSystem\CustomerBooking;
+use App\AdminCPModel\SpaManagementSystem\ListServices;
+use App\AdminCPModel\SpaManagementSystem\Customer;
+use App\AdminCPModel\SpaManagementSystem\CustomerBookingDetail;
+
 class BookingForCustomerController extends Controller
 {
     public function showBooking(){
-    	$listRoom = ListRoom::where('RoomType', '>', 1)->get();
-    	$listServices = ListServices::all(); 
-    	$listStaff = ListStaff::where('StaffActive', 0)->get(); 
-    	return view('admincp.spamanasys.BookingForCustomer.booking',compact('listRoom','listServices','listStaff'));
+    	$room = Room::where('RoomTypeId', '>', 1)->get();
+    	$services = Services::all(); 
+    	$staff = Staff::where('StaffActive', 0)->get(); 
+    	return view('admincp.spamanasys.BookingForCustomer.Booking',compact('room','services','staff'));
     }
 
     public function booking(Request $request){
@@ -23,13 +27,15 @@ class BookingForCustomerController extends Controller
 			[
 				'CustomerName' 			=> 'required',
 				'CustomerPhoneNumber'   => 'required | numeric',
-				'ServicesId' 			=> 'required',
+				'gender'				=> 'required',
+				'ServicesId' 			=> 'required_without_all',
 				'StaffId' 				=> 'required',
 				'RoomId' 				=> 'required',
 			],
 			[
 				'required' => 'Bạn chưa nhập thông tin :attribute ',
-				'CustomerPhoneNumber.numeric' => 'Số điện thoại phải là số'
+				'CustomerPhoneNumber.numeric' => 'Số điện thoại phải là số',
+				'ServicesId.required_without_all' => 'Phải chọn ít nhất 1 dịch vụ',
  			],
 			[
 				'CustomerName' 			=> 'tên khách hàng',
@@ -37,21 +43,26 @@ class BookingForCustomerController extends Controller
 				'ServicesId' 			=> 'dịch vụ',
 				'StaffId' 				=> 'nhân viên tiếp nhận',
 				'RoomId' 				=> 'phòng tiếp nhận',
+				'gender'				=> 'giới tính,'
 			]
 		);
 
-		$checkpassRoom    = false;
-		$checkpassStaff   = false;
-		$checkpassBooking = false;
+		$checkpassRoom     	 	= false;
+		$checkpassStaff    	 	= false;
+		$checkpassCustomer 	 	= false;
+		$checkpassBooking  	 	= false;
+		$checkpassBookingDetail = false;
 
+		$idCustomerBooking;
+		$idCustomer;
 		/*
 			handling spsm_room table
 		*/
-		$room = ListRoom::find($request['RoomId']);
+		$room = Room::find($request['RoomId']);
 		if($room->RoomBlank <= 0){
-			// withErrors(['msg', 'The Message']
 			return redirect()->back()->withInput()->withErrors('Phòng vừa chọn đã hết chỗ trống');
-		}else{
+		}
+		else{
 			$room->RoomBlank -= 1;
 			$checkpassRoom = $room->save();
 		}
@@ -60,32 +71,69 @@ class BookingForCustomerController extends Controller
 			handling spsm_staff table
 		*/
 		if($checkpassRoom == true ){		
-	    	$staff = ListStaff::find($request['StaffId']);
-	    	if($staff->StaffActive ==  1){
-	    		return redirect()->back()->withInput()->withErrors('Nhân viên '.$staff->StaffName.' đang làm việc ở phòng khác');
-	    	}
+	    	$staff = Staff::find($request['StaffId']);
 	    	if($staff->StaffActive ==  0){
 	    		$staff->StaffActive = 1;
-	    		$staff->StaffWorkAtRoomId = $request['RoomId'];
+	    		$staff->StaffWorkAtRoom = $request['RoomId'];
 	    		$checkpassStaff = $staff->save();
+	    	}
+	    	else if($staff->StaffActive ==  1){
+	    		return redirect()->back()->withInput()->withErrors('Nhân viên '.$staff->StaffName.' đang làm việc ở phòng khác');
+	    	}
+	    	else{
+	    		return redirect()->back()->withInput()->withErrors('Nhân viên '.$staff->StaffName.' đang làm việc ở phòng khác');
 	    	}
 		}
 
 		/*
-			handling spsm_customerbooking table
+			handling spsm_customer table
 		*/
 		if($checkpassStaff == true){
-    		$customerBooking = new CustomerBooking();
-    		$customerBooking->RoomId = $request['RoomId'];
-    		$customerBooking->ServicesId = $request['ServicesId'];
-    		$customerBooking->StaffId = $request['StaffId'];
-	    	$customerBooking->CustomerName = $request['CustomerName'];
-	    	$customerBooking->CustomerPhoneNumber = $request['CustomerPhoneNumber'];
-	    	// $customerBooking->CustomerBookingTime = Carbon::now();
-	    	// $customerBooking->updated_at = timestamps('updated_at');
-	    	$customerBooking->save();
+			$customer = new Customer();
+	    	$customer->CustomerName = $request['CustomerName'];
+	    	$customer->CustomerPhoneNumber = $request['CustomerPhoneNumber'];
+	    	$customer->CustomerGender = $request['gender'];
+			$checkpassCustomer = $customer->save();
+			$customer->save();
+			$idCustomer = $customer->CustomerId;
 		}
-		if($customerBooking == true){
+		
+		/*	
+			handling spsm_customerbooking table
+		*/
+		if($checkpassCustomer == true){
+    		$customerBooking = new CustomerBooking();
+    		$customerBooking->CustomerId = $idCustomer;
+
+    		$customerBooking->RoomId = $request['RoomId'];
+    		$customerBooking->StaffId = $request['StaffId'];
+	    	$checkpassBooking = $customerBooking->save();
+			$idCustomerBooking = $customerBooking->CustomerBookingId;
+		}
+
+		/*
+			handling spsm_listservices table
+		*/
+		if($checkpassBooking == true){
+			if(sizeof($request['ServicesId']) > 1){
+				for($i = 0; $i < sizeof($request['ServicesId']); $i++){
+    				$CustomerBookingDetail = new CustomerBookingDetail();
+					$CustomerBookingDetail->CustomerBookingId = $idCustomerBooking;
+					$CustomerBookingDetail->ServicesId = $request['ServicesId'][$i];
+					$checkpassBookingDetail = $CustomerBookingDetail->save();
+				}
+			}
+			else{
+				$CustomerBookingDetail = new CustomerBookingDetail();
+				$CustomerBookingDetail->CustomerBookingId = $idCustomerBooking;
+				$CustomerBookingDetail->ServicesId = $request['ServicesId'][0];
+				$checkpassBookingDetail = $CustomerBookingDetail->save();
+			}
+		}
+
+		
+
+		if($checkpassBookingDetail == true){
 			return back()->with('success_message','Đăng ký dịch vụ cho khách hàng '.$request['CustomerName'].' thành công');
 		}
     }
