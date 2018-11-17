@@ -81,3 +81,9 @@
 	font-weight: bold;
 	color: #fff;
 }
+
+@media(max-width: 768px) {
+	.btn-gallery {
+		
+	}
+}

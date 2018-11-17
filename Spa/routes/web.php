@@ -11,6 +11,7 @@
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,3 +34,13 @@ Route::group(['prefix' => 'admincp'],function(){
 		// Route::post('/booking','AdminCP\SpaManagementSystem\BookingForCustomerController@booking')->name('spa_Booking');
 	});
 });
+=======
+Route::get('/', 'Spa\PageController@getIndexPage')->name('home');
+Route::get('/contact', 'Spa\PageController@getContactPage')->name('contact');
+Route::get('/service', 'Spa\PageController@getServicesPage')->name('services');
+Route::get('/pricing', 'Spa\PageController@getPricingPage')->name('pricing');
+Route::get('/blog', 'Spa\PageController@getBlogPage')->name('blog');
+Route::get('/gallery', 'Spa\PageController@getGalleryPage')->name('gallery');
+Route::get('/signin', 'Spa\PageController@getSignInPage')->name('signin');
+Route::get('/signup', 'Spa\PageController@getSignUpPage')->name('signup');
+>>>>>>> origin/tuan_dev
