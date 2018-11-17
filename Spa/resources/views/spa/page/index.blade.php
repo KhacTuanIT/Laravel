@@ -310,7 +310,7 @@
 		<div class="our-service text-center">
 			<h2 class="title-os">
 				our
-				<span>gallery</span>
+				<span>Blogs</span>
 			</h2>
 		</div>
 		<div class="clear"></div>
