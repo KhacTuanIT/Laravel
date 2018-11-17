@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::group(['prefix' => 'admincp'],function(){
 	Route::get('/','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
 	Route::get('login','AdminCP\AdminCPLogin@showLogin')->name('admincp_showLogin');
