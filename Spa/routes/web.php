@@ -19,3 +19,8 @@ Route::get('/blog', 'Spa\PageController@getBlogPage')->name('blog');
 Route::get('/gallery', 'Spa\PageController@getGalleryPage')->name('gallery');
 Route::get('/signin', 'Spa\PageController@getSignInPage')->name('signin');
 Route::get('/signup', 'Spa\PageController@getSignUpPage')->name('signup');
+
+Route::group(['prefix'=>'spacms'], function() {
+	Route::get('/', 'Spacms\SpacmsController@getDashboard');
+	Route::get('/gallery','Spacms\GallerycmsController@getGalleryCms')->name('gallery-cms');
+});
