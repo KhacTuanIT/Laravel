@@ -18,13 +18,13 @@
 					<span class="m-menu__link-title">
 						<span class="m-menu__link-wrap">
 							<span class="m-menu__link-text">
-								Dashboard
+								Bảng điều khiển
 							</span>
-							<span class="m-menu__link-badge">
+							{{-- <span class="m-menu__link-badge">
 								<span class="m-badge m-badge--danger">
 									2
 								</span>
-							</span>
+							</span> --}}
 						</span>
 					</span>
 				</a>
@@ -39,7 +39,7 @@
 				<a  href="#" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-layers"></i>
 					<span class="m-menu__link-text">
-						Khách hàng
+						Dịch vụ
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
@@ -49,7 +49,7 @@
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
 							<a  href="#" class="m-menu__link ">
 								<span class="m-menu__link-text">
-									Khách hàng
+									Dịch vụ
 								</span>
 							</a>
 						</li>
@@ -63,7 +63,7 @@
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
+						<li class="@yield('MenuBar_ListCustomerBooking')" aria-haspopup="true" >
 							<a  href="{{ route('spa_showCustomer') }}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
@@ -73,24 +73,14 @@
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/base/toastr.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Toastr
-								</span>
-							</a>
-						</li>
 					</ul>
 				</div>
 			</li>
-			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+			<li class="@yield('MenuBar_TitleCustomerMember')" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="#" class="m-menu__link m-menu__toggle">
 					<i class="m-menu__link-icon flaticon-multimedia-1"></i>
 					<span class="m-menu__link-text">
-						Buttons
+						Khách hàng thành viên
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
@@ -100,146 +90,44 @@
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
 							<a  href="#" class="m-menu__link ">
 								<span class="m-menu__link-text">
-									Buttons
+									Khách hàng thành viên
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-							<a  href="#" class="m-menu__link m-menu__toggle">
+						<li class="@yield('MenuBar_AddCustomerMember')" aria-haspopup="true" >
+							<a  href="{{ route('spa_showAddMember') }}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
 								</i>
 								<span class="m-menu__link-text">
-									Button Base
+									Thêm KH thành viên
 								</span>
-								<i class="m-menu__ver-arrow la la-angle-right"></i>
 							</a>
-							<div class="m-menu__submenu">
-								<span class="m-menu__arrow"></span>
-								<ul class="m-menu__subnav">
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/base/default.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Default Style
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/base/square.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Square Style
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/base/pill.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Pill Style
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/base/air.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Air Style
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/buttons/group.html" class="m-menu__link ">
+						<li class="@yield('MenuBar_ListCustomerMember')" aria-haspopup="true" >
+							<a href="{{route('spa_showListCustomerMember')}}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
 								</i>
 								<span class="m-menu__link-text">
-									Button Group
+									Danh sách KH thành viên
 								</span>
 							</a>
-						</li>
-						<li class="m-menu__item " aria-haspopup="true" >
-							<a  href="components/buttons/dropdown.html" class="m-menu__link ">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Button Dropdown
-								</span>
-							</a>
-						</li>
-						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-							<a  href="#" class="m-menu__link m-menu__toggle">
-								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-									<span></span>
-								</i>
-								<span class="m-menu__link-text">
-									Button Icon
-								</span>
-								<i class="m-menu__ver-arrow la la-angle-right"></i>
-							</a>
-							<div class="m-menu__submenu">
-								<span class="m-menu__arrow"></span>
-								<ul class="m-menu__subnav">
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/icon/lineawesome.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Lineawesome Icons
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/icon/fontawesome.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Fontawesome Icons
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="components/buttons/icon/flaticon.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Flaticon Icons
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
 						</li>
 					</ul>
 				</div>
 			</li>
 			<li class="m-menu__section">
 				<h4 class="m-menu__section-text">
-					Snippets
+					QUẢN LÝ NHÂN VIÊN
 				</h4>
 				<i class="m-menu__section-icon flaticon-more-v3"></i>
 			</li>
-			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+			<li class="@yield('MenuBar_TitleStaffManagement')" aria-haspopup="true"  data-menu-submenu-toggle="hover">
 				<a  href="#" class="m-menu__link m-menu__toggle">
-					<i class="m-menu__link-icon flaticon-interface-3"></i>
+					<i class="m-menu__link-icon flaticon-layers"></i>
 					<span class="m-menu__link-text">
-						General
+						QUẢN LÝ NHÂN VIÊN
 					</span>
 					<i class="m-menu__ver-arrow la la-angle-right"></i>
 				</a>
@@ -249,60 +137,33 @@
 						<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" >
 							<a  href="#" class="m-menu__link ">
 								<span class="m-menu__link-text">
-									General
+									QUẢN LÝ NHÂN VIÊN
 								</span>
 							</a>
 						</li>
-						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
-							<a  href="#" class="m-menu__link m-menu__toggle">
+						<li class="@yield('MenuBar_AddStaff')" aria-haspopup="true" >
+							<a  href="{{route('spa_showAddStaff')}}" class="m-menu__link ">
 								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 									<span></span>
 								</i>
 								<span class="m-menu__link-text">
-									Pricing Tables
+									Thêm mới nhân viên
 								</span>
-								<i class="m-menu__ver-arrow la la-angle-right"></i>
 							</a>
-							<div class="m-menu__submenu">
-								<span class="m-menu__arrow"></span>
-								<ul class="m-menu__subnav">
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="snippets/general/pricing-tables/pricing-table-1.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Pricing Tables v1
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="snippets/general/pricing-tables/pricing-table-2.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Pricing Tables v2
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true" >
-										<a  href="snippets/general/pricing-tables/pricing-table-3.html" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Pricing Tables v3
-											</span>
-										</a>
-									</li>
-								</ul>
-							</div>
+						</li>
+						<li class="@yield('MenuBar_ListStaff')" aria-haspopup="true" >
+							<a  href="{{ route('spa_showListStaff') }}" class="m-menu__link ">
+								<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+									<span></span>
+								</i>
+								<span class="m-menu__link-text">
+									Danh sách nhân viên
+								</span>
+							</a>
 						</li>
 					</ul>
 				</div>
 			</li>
-		</ul>
 	</div>
 	<!-- END: Aside Menu -->
 </div>

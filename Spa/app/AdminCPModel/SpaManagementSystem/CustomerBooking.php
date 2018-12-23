@@ -33,7 +33,13 @@ class CustomerBooking extends Model
 
     public function getCustomer(){
         return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Customer','CustomerId','CustomerId');
+    } 
+
+    public function getCustomerMember(){
+        return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\CustomerMember','CustomerId','CustomerMemberId');
     }
+
+
     
     public function getRoom(){
         return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\Room','RoomId','RoomId');

@@ -8,9 +8,10 @@ class Customer extends Model
 {
     protected $table = 'spams_customer';
     protected $primaryKey = 'CustomerId';
+    public $incrementing = false;
     public $timestamps = false;
 
     public function getCustomerBooking(){
-    	return $this->hasMany('App\AdminCPModel\SpaManagementSystem\CustomerBooking');
+    	return $this->belongsTo('App\AdminCPModel\SpaManagementSystem\CustomerBooking','CustomerId','CustomerId');
     }
 }

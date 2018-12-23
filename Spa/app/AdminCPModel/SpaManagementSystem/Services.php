@@ -13,5 +13,6 @@ class Services extends Model
 
     public function getCustomerBooking(){
     	return $this->belongsToMany('App\AdminCPModel\SpaManagementSystem\CustomerBooking','App\AdminCPModel\SpaManagementSystem\CustomerBookingDetail','CustomerBookingId','ServicesId');
-    }
+    }    
+
 }

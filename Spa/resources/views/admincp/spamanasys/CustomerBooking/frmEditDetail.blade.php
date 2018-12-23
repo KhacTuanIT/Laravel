@@ -1,9 +1,16 @@
 @extends('admincp.spamanasys.master')
 
 {{-- MENU BAR --}}
-@section('MenuBar_DashBoard','m-menu__item  m-menu__item--active')
-@section('MenuBar_TitleBookingForCustomer','m-menu__item m-menu__item--submenu')
+@section('MenuBar_DashBoard','m-menu__item')
+@section('MenuBar_TitleBookingForCustomer','m-menu__item m-menu__item--submenu m-menu__item--open m-menu__item--expanded')
 @section('MenuBar_BookingForCustomer','m-menu__item')
+@section('MenuBar_ListCustomerBooking','m-menu__item m-menu__item--active')
+@section('MenuBar_TitleCustomerMember','m-menu__item m-menu__item--submenu')
+@section('MenuBar_AddCustomerMember','m-menu__item')
+@section('MenuBar_ListCustomerMember','m-menu__item')
+@section('MenuBar_TitleStaffManagement','m-menu__item m-menu__item--submenu ')
+@section('MenuBar_AddStaff','m-menu__item')
+@section('MenuBar_ListStaff','m-menu__item')
 {{-- END MENU BAR --}}
 
 
@@ -44,36 +51,96 @@
 						</span>
 					</div>
 				</div>
+
 				<form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="Rowpage">
 					<div class="m-portlet__body"  id="pageContent">
+						{{csrf_field()}}
+						@if($customerBooking->CustomerMember == 1)
+						<input type="hidden" name="idCustomer" value="{{$customerMember->CustomerMemberId}}">
+						@else
+						<input type="hidden" name="idCustomer" value="{{$customer->CustomerId}}">
+						@endif
+						<input type="hidden" name="idCustomerBooking" value="{{$customerBooking->CustomerBookingId}}">
 						<div class="form-group m-form__group row">
 							<div class="col-lg-4">
 								<label>
 									Họ tên:
 								</label>
+								@if($customerBooking->CustomerMember == 1)
+								<input type="text" value="{{$customerMember->CustomerMemberName}}" class="form-control m-input " disabled>
+								@else
 								<input type="text" name="CustomerName" value="{{$customer->CustomerName}}" class="form-control m-input">
+								@endif
 							</div>
 							<div class="col-lg-4">
 								<label class="">
 									Số điện thoại:
 								</label>
+								@if($customerBooking->CustomerMember == 1)
+								<input type="number" value="{{$customerMember->CustomerMemberPhoneNumber}}" class="form-control m-input" disabled>
+								@else
 								<input type="number" name="CustomerPhoneNumber" value="{{$customer->CustomerPhoneNumber}}" class="form-control m-input">
+								@endif
 							</div>
 							<div class="col-lg-4">
 								<label>
 									Giới tính:
 								</label>
 								<div class="m-radio-inline">
-									<label class="m-radio m-radio--bold m-radio--state-info">
-										<input type="radio" name="gender" value="1" @if($customer->CustomerGender == 1) {{'checked'}} @endif>
-										Nam
-										<span></span>
-									</label>
-									<label class="m-radio m-radio--bold m-radio--state-danger">
-										<input type="radio" name="gender" value="0" @if($customer->CustomerGender == 0) {{'checked'}} @endif>
-										Nữ
-										<span></span>
-									</label>
+									@if($customerBooking->CustomerMember == 1)
+										@if($customerMember->CustomerMemberGender == 1) 
+											{!!
+												'<label class="m-radio m-radio--bold m-radio--state-info">
+												<input type="radio" checked 
+												>
+												Nam
+												<span></span>
+												</label>'
+											!!} 
+										@else 
+											{!!
+												'<label class="m-radio m-radio--bold m-radio--state-danger">
+												<input type="radio" checked 
+												>
+												Nữ
+												<span></span>
+												</label>' 
+												!!}
+										@endif
+									@else
+										@if($customer->CustomerGender == 1) 
+											{!!
+												'<label class="m-radio m-radio--bold m-radio--state-info">
+													<input type="radio" name="gender" value="1" checked 
+													>
+													Nam
+													<span></span>
+												</label>
+												<label class="m-radio m-radio--bold m-radio--state-danger">
+												<input type="radio" name="gender" value="0"
+												>
+												Nữ
+												<span></span>
+												</label>'
+											!!} 
+										@else
+											{!!
+												'<label class="m-radio m-radio--bold m-radio--state-info">
+													<input type="radio" name="gender" value="1"
+													>
+													Nam
+													<span></span>
+												</label>
+												<label class="m-radio m-radio--bold m-radio--state-danger">
+												<input type="radio"checked name="gender" value="0"
+												>
+												Nữ
+												<span></span>
+												</label>
+												'
+											!!}
+										@endif
+									@endif
 								</div>
 							</div>
 						</div>
@@ -82,7 +149,18 @@
 								<label class="">
 									Phòng:
 								</label>
-								<input type="email" name="RoomId" value="{{$customerBooking->getRoom->RoomName}}" class="form-control m-input">
+								<center><div class="col-6" style="padding-bottom: 5px;color: white">
+									<a class="btn btn-primary" id="btn-select-room" data-toggle="modal" data-target="#listroom">
+										Chọn phòng
+									</a>
+								</div>
+								</center>
+								<div class="col-12">
+									<input type="hidden" name="RoomOldId" value="{{$customerBooking->getRoom->RoomId}}">
+									<input type="hidden" name="RoomId" value="{{$customerBooking->getRoom->RoomId}}">
+									<input type="text" name="room_name" value="{{$customerBooking->getRoom->RoomName." [".$customerBooking->getRoom->getRoomType->RoomTypeName."]"}}" class="form-control m-input" disabled>
+									
+								</div>
 							</div>
 							<div class="col-lg-4">
 								<label class="">
@@ -112,6 +190,7 @@
 									Nhân viên tiếp nhận:
 								</label>
 								<div class="m-input-icon m-input-icon--right">
+									<input type="hidden" name="StaffOldId" value="{{$customerBooking->StaffId}}">
 									<select name="StaffId" class="form-control m-input"  required >
 										@foreach($listStaff as $value)
 										<option value="{{$value->StaffId}}"
@@ -133,12 +212,7 @@
 									Thời gian tiếp nhận:
 								</label>
 								<div class="m-input-icon m-input-icon--right">
-									<input type="text" name="CustomerBookingTime" class="form-control m-input" value="{{date("H:i d-m-Y",strtotime($customerBooking->CustomerBookingTime))}}">
-									<span class="m-input-icon__icon m-input-icon__icon--right">
-										<span>
-											<i class="la la-bookmark-o"></i>
-										</span>
-									</span>
+									<input type="datetime-local" name="CustomerBookingTime" class="form-control m-input col-lg-3" value="{{date("Y-m-d\TH:i:s",strtotime($customerBooking->CustomerBookingTime))}}">
 								</div>
 							</div>
 						</div>
@@ -147,6 +221,9 @@
 								<div class="row">
 									<div class="col-lg-4"></div>
 									<div class="col-lg-8">
+										<button type="reset" class="btn btn-default" data-dismiss="modal">
+											Đặt lại
+										</button>
 										<button type="submit" class="btn btn-primary">
 											Chỉnh sửa
 										</button>
@@ -159,18 +236,10 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
 @endsection
 
 @push('scripts')
-<script src="assets/demo/default/custom/components/forms/widgets/bootstrap-select.js" type="text/javascript"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-	});
-</script>
-</script>
 
 @endpush
 

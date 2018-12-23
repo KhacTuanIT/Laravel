@@ -1,16 +1,53 @@
 @extends('admincp.spamanasys.master')
 
 {{-- MENU BAR --}}
-@section('MenuBar_DashBoard','m-menu__item  m-menu__item--active')
-@section('MenuBar_TitleBookingForCustomer','m-menu__item m-menu__item--submenu')
+
+@section('MenuBar_DashBoard','m-menu__item')
+@section('MenuBar_TitleBookingForCustomer','m-menu__item m-menu__item--submenu m-menu__item--open m-menu__item--expanded')
 @section('MenuBar_BookingForCustomer','m-menu__item')
+@section('MenuBar_ListCustomerBooking','m-menu__item m-menu__item--active')
+@section('MenuBar_TitleCustomerMember','m-menu__item m-menu__item--submenu')
+@section('MenuBar_AddCustomerMember','m-menu__item')
+@section('MenuBar_ListCustomerMember','m-menu__item')
+@section('MenuBar_TitleStaffManagement','m-menu__item m-menu__item--submenu ')
+@section('MenuBar_AddStaff','m-menu__item')
+@section('MenuBar_ListStaff','m-menu__item')
+
 {{-- END MENU BAR --}}
 
 
 
 @section('titlePage','Bảng điều khiển Spa')
-@section('headTitle','Bảng điều khiển')
-
+@section('headTitle','Bảng điều khiển ')
+@section('typePage')
+<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+	<li class="m-nav__item m-nav__item--home">
+		<a href="#" class="m-nav__link m-nav__link--icon">
+			<i class="m-nav__link-icon la la-home"></i>
+		</a>
+	</li>
+	<li class="m-nav__separator">
+		-
+	</li>
+	<li class="m-nav__item">
+		<a href="{{ route('spa_showDashBoard') }}" class="m-nav__link">
+			<span class="m-nav__link-text">
+				Bảng điều khiển
+			</span>
+		</a>
+	</li>
+	<li class="m-nav__separator">
+		-
+	</li>
+	<li class="m-nav__item">
+		<a href="{{ route('spa_showCustomer') }}" class="m-nav__link">
+			<span class="m-nav__link-text">
+				Khách hàng đang được phục vụ
+			</span>
+		</a>
+	</li>
+</ul>
+@endsection
 
 @section('content')
 <div class="row">
@@ -123,11 +160,11 @@
 								</div>
 							</div>
 							<div class="col-xl-4 order-1 order-xl-2 m--align-right">
-								<a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+								<a href="{{ route('spa_showBooking') }}" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
 									<span>
 										<i class="la la-cart-plus"></i>
 										<span>
-											New Order
+											Đăng ký mới
 										</span>
 									</span>
 								</a>
@@ -137,82 +174,7 @@
 					</div>
 					<!--end: Search Form -->
 					<!--begin: Datatable -->
-					<table class="m-datatable" id="html_table" width="100%">
-						<thead>
-							<tr>
-								<th>
-									Mã KH
-								</th>
-								<th>
-									Tên khách hàng
-								</th>
-								<th>
-									Số điện thoại
-								</th>
-								<th>
-									Phòng
-								</th>
-								<th>
-									Thời gian vào
-								</th>
-								<th>
-									Chi tiết
-								</th>
-								<th>
-									Hành động
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($customerBooking as $value)
-							<tr>
-								<td scope="row">
-									{{$value->CustomerBookingId}}
-								</td>
-								<td>
-									{{$value->getCustomer->CustomerName}}
-								</td>
-								<td>
-									{{$value->getCustomer->CustomerPhoneNumber}}
-								</td>
-								<td>
-									{{$value->getRoom->RoomName}}
-								</td>
-								<td>
-									{{date("H:i d-m-Y",strtotime($value->CustomerBookingTime))}}
-								</td>
-								<td>
-									<a href="{{route('spa_showDetailCustomer',['id'=> $value->CustomerBookingId])}}" class="btn btn-outline-primary m-btn m-btn--icon">
-										<span>
-											<i class="la la-archive"></i>
-											<span>
-												Xem chi tiết
-											</span>
-										</span>
-									</a>
-								</td>
-								<td data-field="Actions" class="m-datatable__cell">
-									<span style="overflow: visible; width: 110px;">						
-										<div class="dropdown ">							
-											<a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">
-												<i class="la la-ellipsis-h"></i>                            
-											</a>						  	
-											<div class="dropdown-menu dropdown-menu-right">						    	<a class="dropdown-item" href="#">
-												<i class="la la-edit"></i> Chỉnh sửa
-												</a>
-												<a class="dropdown-item" href="{{ route('spa_showCheckout',['id' => $value->CustomerBookingId]) }}">
-													<i class="la la-print"></i> 
-													Thanh toán
-												</a>						  	
-											</div>		
-
-										</div>                     
-									</span>
-								</td>
-							</tr>	
-							@endforeach
-						</tbody>
-					</table>
+					<div class="m_datatable" id="api_methods"></div>
 					<!--end: Datatable -->
 				</div>
 			</div>
@@ -225,5 +187,138 @@
 @endsection
 
 @push('scripts')
-<script src="assets/demo/default/custom/components/datatables/base/html-table.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var DefaultDatatableDemo = function() {
+    var t = function() {
+        var t = {
+                data: {
+                    type: "remote",
+                    source: {
+                        read: {
+                        	method: "GET",
+                            url: "{{ route('spa_jsda1') }}"
+                        }
+                    },
+                    pageSize: 10,
+                    saveState: {
+                        cookie: false,
+                        webstorage: false
+                    },
+                    serverPaging: false,
+                    serverFiltering: false,
+                    serverSorting: false,
+                    autoColumns: false,
+                },
+                layout: {
+                    theme: "default",
+                    class: "",
+                    scroll: !0,
+                    height: 550,
+                    footer: !1
+                },
+                sortable: true,
+                pagination: true,
+                search: {
+                    input: $("#generalSearch")
+                },
+                columns: [
+                //{
+                //     field: "CustomerBookingId",
+                //     title: "#",
+                //     sortable: !1,
+                //     width: 40,
+                // }, 
+                {
+                    field: "CustomerBookingId",
+                    title: "#",
+                    width: 30,
+                },{
+                    field: "CustomerName",
+                    title: "Tên khách hàng",
+                    width: 150,
+                },{
+                    field: "CustomerPhoneNumber",
+                    title: "Số điện thoại",
+                    width: 150,
+                },{
+                    field: "RoomName",
+                    title: "Phòng",
+                    width: 150,
+                },{
+                    field: "BookingTime",
+                    title: "Thời gian vào",
+                    width: 150,
+                },{
+                    field: "Hành động",
+                    width: 110,
+                    title: "Hành động",
+                    overflow: "visible",
+                    template: function(t) {
+                        return '<a href="{{route('spa_showDetailCustomer',['id'=> ''])}}/'+t.CustomerBookingId+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">\t\t\t\t\t\t\t<i class="la la-edit"></i>\t\t\t\t\t\t</a>\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill" title="Delete">\t\t\t\t\t\t\t<i class="la la-trash"></i>\t\t\t\t\t\t</a>\t\t\t\t\t'
+                    }
+                },{
+                    field: "Thanh toán",
+                    title: "Thanh toán",
+                    sortable: !1,
+                    overflow: "visible",
+                    template: function(t) {
+                        return '<a href="{{route('spa_showCheckout',['id'=> ''])}}/'+t.CustomerBookingId+'" class="btn btn-outline-primary"><span><span>Thanh toán</span></span></a>'
+                    }
+                }
+                ]
+            },
+
+        // e.reload();
+    	a = $(".m_datatable").mDatatable(t);
+    	setInterval( function () {
+    		console.log("receive_data");
+    		$.get('{{ route('spa_getSessionCustomer') }}', function(data){ 
+    			console.log(data);
+    			if(data == 1){
+    				a.destroy();
+    				a = $(".m_datatable").mDatatable(t);
+    			}
+    		});
+    	}, 1000);
+       //  	setInterval( function () {
+       //      	// a.destroy()
+    			// // a = $(".m_datatable").mDatatable(t);
+    			// // a.reload();
+       //  		a.load();
+	      //   	console.log("refreshed");
+       //  	}, 3000);
+    	// console.log(a.getPageSize());
+        // setTimeout(function(){
+        // }, 3000);
+        
+
+        // $("#m_datatable_destroy").on("click", function() {
+        // }), $("#m_datatable_init").on("click", function() {
+        //     e = $(".m_datatable").mDatatable(t)
+        // }), $("#m_datatable_reload").on("click", function() {
+        //     e.reload()
+        // }), $("#m_datatable_sort").on("click", function() {
+        //     e.sort("ShipCity")
+        // }), $("#m_datatable_get").on("click", function() {
+        //     var t = e.setSelectedRecords().getColumn("ShipCity").getValue();
+        //     "" === t && (t = "Select checbox"), $("#datatable_value").html(t)
+        // }), $("#m_datatable_check").on("click", function() {
+        //     var t = $("#m_datatable_check_input").val();
+        //     e.setActive(t)
+        // }), $("#m_datatable_check_all").on("click", function() {
+        //     e.setActiveAll(!0)
+        // }), $("#m_datatable_uncheck_all").on("click", function() {
+        //     e.setActiveAll(!1)
+        // })
+    };
+    return {
+        init: function() {
+            t()
+        }
+    }
+}();
+jQuery(document).ready(function() {
+    DefaultDatatableDemo.init()
+});
+</script>
 @endpush
