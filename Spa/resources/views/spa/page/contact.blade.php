@@ -7,8 +7,8 @@
 <div class="container-fluid page-name">
 	<div class="container-fluid box-page">
 		<div class="container box-title-page">
-			<div class="col-sm-6 col-xs-12 title-page">Contact</div>
-			<div class="col-sm-6 col-xs-12 full-title-page">Home / Contact</div>
+			<div class="col-sm-6 col-xs-12 title-page">Liên hệ</div>
+			<div class="col-sm-6 col-xs-12 full-title-page">Trang chủ / Liên hệ</div>
 		</div>
 	</div>
 </div>
@@ -22,38 +22,53 @@
 	</div> -->
 	<div id="googleMap"></div>
 
-	<div class="container text-center form-contact">
+	<div class="container form-contact">
 		<form>
 			<div class="col-sm-6 col-xs-12 form-group">
-				<input class="form-control" type="text" name="" placeholder="Your name" >
+				<input class="form-control" type="text" id="name_feedback" name="name_feedback" placeholder="Họ tên" >
 				<i class="fas fa-user"></i>
 			</div>
 			<div class="col-sm-6 col-xs-12 form-group">
-				<input class="form-control" type="text" name="" placeholder="Company">
-				<i class="fas fa-university"></i>
+				<input class="form-control" type="text" id="address_feedback" name="address_feedback" placeholder="Địa chỉ">
+				<i class="fas fa-map-marker-alt"></i>
+			</div>
+			<div class="col-sm-6 col-xs-12 none-margin">
+				<span class="m--font-danger" id="error--name_feedback"></span>
+			</div>
+			<div class="col-sm-6 col-xs-12 none-margin">
+				<span class="m--font-danger" id="error--address_feedback"></span>
 			</div>
 			<div class="col-sm-6 col-xs-12 form-group">
-				<input class="form-control" type="email" name="" placeholder="Email">
+				<input class="form-control" type="email" id="email_feedback" name="email_feedback" placeholder="Email">
 				<i class="fas fa-envelope"></i>
 			</div>
 			<div class="col-sm-6 col-xs-12 form-group">
-				<input class="form-control" type="text" name="" placeholder="Phone">
+				<input class="form-control" type="text" id="phone_feedback" name="phone_feedback" placeholder="Số điện thoại">
 				<i class="fas fa-phone"></i>
 			</div>
+			<div class="col-sm-6 col-xs-12 none-margin">
+				<span class="m--font-danger" id="error--email_feedback"></span>
+			</div>
+			<div class="col-sm-6 col-xs-12 none-margin">
+				<span class="m--font-danger" id="error--phone_feedback"></span>
+			</div>
 			<div class="col-sm-12 col-xs-12 form-group last-fg">
-				<textarea class="form-control" type="text" name="">
+				<textarea class="form-control" type="text" id="message_feedback" name="message_feedback">
 				</textarea>
 				<i class="fas fa-paper-plane"></i>
 			</div>
+			<div class="col-sm-12 col-xs-12 none-margin">
+				<span class="m--font-danger" id="error--message_feedback"></span>
+			</div>
 			<div class="col-sm-12 col-xs-12 form-group text-right">
-				<input type="submit" name="">
+				<input type="button" name="feedback" data-feedurl="{{route('feedback')}}" id="feedback" value="Gửi phản hồi">
 			</div>
 		</form>
 	</div>
 	<div class="clear"></div>
 </div>
 
-<div class="container-fluid place-company">
+{{-- <div class="container-fluid place-company">
 	<div class="container-fluid place-company-box">
 		<div class="container place-box">
 			<div class="col-sm-4 col-xs-12 text-center place-item">
@@ -82,11 +97,13 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --}}
 
 @endsection
 
 @push('script')
+<script src="assets/js/feedback.js"></script>
+<script src="assets/js/javascript.js"></script>
 <script src="assets/js/load-page.js"></script>
 <script src="assets/dist/wow.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
@@ -95,6 +112,5 @@
 <script src="assets/js/gmaps-custom.js"></script>
 <script src="assets/js/carousel-custom.js"></script>
 <script src="assets/js/gallery-custom.js"></script>
-<script src="assets/js/wow-custom.js"></script>
 <script src="assets/js/page-custom.js"></script>
 @endpush

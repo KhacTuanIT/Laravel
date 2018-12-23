@@ -5,15 +5,13 @@
 	<div class="container full-nav">
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav ">
-				<li><a href="{{route('home')}}">home</a></li>
-				<li><a href="{{route('services')}}">service</a></li>
-				<li><a href="{{route('pricing')}}">pricing</a></li>
-				<li><a href="{{route('gallery')}}">gallery</a></li>
+				<li><a href="{{route('home')}}">trang chủ</a></li>
+				<li><a href="{{route('services')}}">dịch vụ</a></li>
+				<li><a href="{{route('pricing')}}">giá</a></li>
 				<li class="logo"><a href="{{route('home')}}"><img src="assets/images/logo.png"></a></li>
+				<li><a href="{{route('gallery')}}">bộ sưu tập</a></li>
 				<li><a href="{{route('blog')}}">blog</a></li>
-				<li><a href="{{route('signin')}}">sign in</a></li>
-				<li><a href="{{route('signup')}}">sign up</a></li>
-				<li><a href="{{route('contact')}}">contact</a></li>
+				<li><a href="{{route('contact')}}">liên hệ</a></li>
 			</ul>
 			
 		</div>
@@ -32,14 +30,12 @@
 		<div class="col-xs-12 navbar-main navbar-collapse collapse">
 			<div class="nav nav-pills nav-justified main-menu text-uppercase text-center">
 				<ul class="nav navbar-nav">
-					<li><a href="{{route('home')}}">home</a></li>
-					<li><a href="{{route('services')}}">service</a></li>
-					<li><a href="{{route('pricing')}}">pricing</a></li>
-					<li><a href="{{route('gallery')}}">gallery</a></li>
+					<li><a href="{{route('home')}}">trang chủ</a></li>
+					<li><a href="{{route('services')}}">dịch vụ</a></li>
+					<li><a href="{{route('pricing')}}">giá</a></li>
+					<li><a href="{{route('gallery')}}">bộ sưu tập</a></li>
 					<li><a href="{{route('blog')}}">blog</a></li>
-					<li><a href="{{route('signin')}}">sign in</a></li>
-					<li><a href="{{route('signup')}}">sign up</a></li>
-					<li><a href="{{route('contact')}}">contact</a></li>
+					<li><a href="{{route('contact')}}">liên hệ</a></li>
 				</ul>
 			</div>
 		</div>

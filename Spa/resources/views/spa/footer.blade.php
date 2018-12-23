@@ -1,22 +1,22 @@
 <footer class="container-fluid footer-spa">
 	<div class="container">
 		<div class="col-sm-4 col-xs-12">
-			<div class="footer-title">about us</div>
+			<div class="footer-title">liên hệ</div>
 			<div class="footer-line"></div>
 			<div>
-				<span>
+				{{-- <span>
 					This is Photoshop's version of Lorem impsum. Proin gra vi da nibh vel velit a uctor aliquet.
-				</span>
+				</span> --}}
 				<span>
 					<i class="fas fa-map-marker-alt"></i>
 					<span>
-						3'rd floor, Paris point, Surat - 395006
+						315 Phạm Ngũ Lão, Quận 1, TPHCM
 					</span>
 				</span>
 				<span>
 					<i class="fas fa-phone"></i>
 					<span>
-						Inquiry - 0261 657 6 657
+						Tư vấn - 0261 657 6 657
 					</span>
 				</span>
 				<span>
@@ -30,52 +30,34 @@
 			</div>
 		</div>
 		<div class="col-sm-4 col-xs-12">
-			<div class="footer-title">Gallery</div>
+			<div class="footer-title">bộ sưu tập</div>
 			<div class="footer-line"></div>
 			<div class="footer-img">
+				@foreach($sliders as $slider)
 				<div class="col-xs-4 ffirst-img">
-					<img src="assets/images/footer/1.jpg" width="100%">
+					<img src="assets/images/sliders/{{$slider->image}}" width="100%">
 					<div class="fimg-eff"></div>
 				</div>
-				<div class="col-xs-4">
-					<img src="assets/images/footer/2.jpg" width="100%">
-					<div class="fimg-eff"></div>
-				</div>
-				<div class="col-xs-4">
-					<img src="assets/images/footer/3.jpg" width="100%">
-					<div class="fimg-eff"></div>
-				</div>
-				<div class="col-xs-4 ffirst-img">
-					<img src="assets/images/footer/4.jpg" width="100%">
-					<div class="fimg-eff"></div>
-				</div>
-				<div class="col-xs-4">
-					<img src="assets/images/footer/5.jpg" width="100%">
-					<div class="fimg-eff"></div>
-				</div>
-				<div class="col-xs-4">
-					<img src="assets/images/footer/6.jpg" width="100%">
-					<div class="fimg-eff"></div>
-				</div>
+				@endforeach
 			</div>
 		</div>
 		<div class="col-sm-4 col-xs-12">
-			<div class="footer-title">menu</div>
+			<div class="footer-title">danh sách link</div>
 			<div class="footer-line"></div>
 			<div class="footer-link">
 				<div class="col-xs-6">
 					<ul>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('home')}}">Trang chủ</a>
 						</li>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('services')}}">Dịch vụ</a>
 						</li>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('pricing')}}">Giá</a>
 						</li>
 					</ul>
 				</div>
@@ -83,15 +65,15 @@
 					<ul>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('gallery')}}">Bộ sưu tập</a>
 						</li>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('blog')}}">Blog</a>
 						</li>
 						<li>
 							<i class="fas fa-angle-right"></i>
-							<a href="">link</a>
+							<a href="{{route('contact')}}">Liên hệ</a>
 						</li>
 					</ul>
 				</div>

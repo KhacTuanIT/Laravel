@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Spa\Slider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('spa.footer',function($view) {
+            $sliders = Slider::take(6)->get();
+            $view->with('sliders', $sliders);
+        });
     }
 
     /**

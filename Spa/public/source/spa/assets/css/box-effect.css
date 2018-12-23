@@ -19,7 +19,7 @@
 	left: 0;
 	width: calc(100% + 1px);
 	height: calc(100% + 1px);
-	transform: rotate(-45deg) scale(.5);
+	transform: rotate(-30deg) scale(0);
 	background: linear-gradient(to right, rgba(38,196,213,.6), rgba(38,196,213,.9));
 	opacity: 0;
 	z-index: 0;
