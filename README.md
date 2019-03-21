@@ -7,5 +7,5 @@
   xx/11/2018: Start Project
   10/11/2018: 
     - Deploy layout Spa Management System (thinh_dev)
-    - Deploy layout Front-end System (tuan_dev)
+    - Deploy layout Front-end and Content Management System (tuan_dev)
   
